@@ -1,19 +1,29 @@
 package com.example
 
-import akka.actor.{ActorSystem}
+import java.io.File
+
+import akka.actor.{ActorLogging, Props, ActorSystem, Actor}
 import com.typesafe.config.ConfigFactory
 
-/**
-  * Akka-Remoteを用いて接続し、メッセージを送信するクラス
-  */
-object RemoteClientApp extends App {
-  override def main(args: Array[String]): Unit = {
-    val config = ConfigFactory.load("client.conf")
-    val system = ActorSystem.apply("RemoteClientApp", config)
-    val remoteActorRef = system.actorSelection("akka.tcp://RemoteServerApp@127.0.0.1:2552/com/example/Receive")
-    remoteActorRef ! "Remote"
-
-    Thread.sleep(600000)
-    system.shutdown()
+class LocalActor extends Actor with ActorLogging {
+  @throws[Exception](classOf[Exception])
+  override def preStart(): Unit = {
+    val remoteActor = context.actorSelection(RemoteClientApp.config.getString("app.remote-system.remote-actor"))
+    log.info("Remote actor is {}", remoteActor)
+    remoteActor ! "hi"
   }
+
+  override def receive: Receive = {
+    case msg: String =>
+      log.info("Client received {} from {}", msg, sender)
+    case any =>
+      log.info("Client received unknown message {} from {}", any, sender)
+  }
+}
+
+object RemoteClientApp extends App {
+  val configFile = getClass.getClassLoader.getResource("resources/client.conf").getFile
+  val config = ConfigFactory.parseFile(new File(configFile))
+  val system = ActorSystem("client-system", config)
+  val localActor = system.actorOf(Props[LocalActor], name = "local")
 }
