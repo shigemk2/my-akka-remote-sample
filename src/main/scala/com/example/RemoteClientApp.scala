@@ -11,6 +11,8 @@ class LocalActor extends Actor with ActorLogging {
     val remoteActor = context.actorSelection(RemoteClientApp.config.getString("app.remote-system.remote-actor"))
     log.info("Remote actor is {}", remoteActor)
     remoteActor ! "hi"
+    remoteActor ! "test"
+    remoteActor ! "hoge"
   }
 
   override def receive: Receive = {

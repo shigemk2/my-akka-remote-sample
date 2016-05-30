@@ -17,7 +17,7 @@ class RemoteActor extends Actor with ActorLogging {
   override def receive: Receive = {
     case msg: String =>
       log.info("Remote received {} from {}", msg, sender)
-      sender ! "hi"
+      sender ! msg
     case any =>
       log.info("Remote received unknown message {} from {}", any, sender)
   }
