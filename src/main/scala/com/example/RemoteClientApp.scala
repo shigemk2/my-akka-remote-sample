@@ -22,7 +22,7 @@ class LocalActor extends Actor with ActorLogging {
 }
 
 object RemoteClientApp extends App {
-  val configFile = getClass.getClassLoader.getResource("resources/client.conf").getFile
+  val configFile = getClass.getClassLoader.getResource("client.conf").getFile
   val config = ConfigFactory.parseFile(new File(configFile))
   val system = ActorSystem("client-system", config)
   val localActor = system.actorOf(Props[LocalActor], name = "local")

@@ -6,9 +6,7 @@ import akka.actor.{ActorLogging, Actor, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 
 object RemoteServerApp extends App {
-  println(getClass.getClassLoader.getResource("server.conf"))
-  val configFile = getClass.getClassLoader.getResource("resources/server.conf").getFile
-  println(getClass.getClassLoader.getResource("resources/client.conf").getFile)
+  val configFile = getClass.getClassLoader.getResource("server.conf").getFile
   val config = ConfigFactory.parseFile(new File(configFile))
   val system = ActorSystem("remote-system", config)
   val remote = system.actorOf(Props[RemoteActor], name="remote")
