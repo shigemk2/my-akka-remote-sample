@@ -13,6 +13,9 @@ class LocalActor extends Actor with ActorLogging {
     remoteActor ! "hi"
     remoteActor ! "test"
     remoteActor ! "hoge"
+    val string = scala.util.Random.alphanumeric.take(10).mkString
+    println(string)
+    remoteActor ! string
   }
 
   override def receive: Receive = {
