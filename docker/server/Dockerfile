@@ -10,11 +10,6 @@ RUN cd /opt \
  && ln -s /opt/activator-dist-${ACTIVATOR_VER} /opt/activator \
  && rm -f /opt/typesafe-activator-${ACTIVATOR_VER}.zip
  
-# Expose ports.
-EXPOSE 8888
-
 # Define an entry point.
-ENTRYPOINT ["top", "-b"]
-# CMD ["/opt/activator/bin/activator", "ui", "-Dhttp.address=0.0.0.0"]
-# CMD /opt/activator/bin/activator \"runMain com.server.RemoteServerApp\"
+CMD cd /opt/src/ && /opt/activator/bin/activator "runMain com.server.RemoteServerApp"
 
