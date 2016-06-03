@@ -1,0 +1,37 @@
+remote-1:
+  build : ./server
+  ports :
+    - 5150:5150/tcp
+    - 5150:5150/udp
+  volumes:
+      - ../../my-akka-remote-sample:/opt/src
+  links:
+   - local-1
+   - local-2
+
+remote-2:
+  build : ./server
+  ports :
+    - 5151:5150/tcp
+    - 5151:5150/udp
+  volumes:
+      - ../../my-akka-remote-sample:/opt/src
+  links:
+   - local-1
+   - local-2
+
+local-1:
+  build : ./client
+  ports :
+    - 5152:5151/tcp
+    - 5152:5151/udp
+  volumes:
+      - ../../my-akka-remote-sample:/opt/src
+
+local-2:
+  build : ./client
+  ports :
+    - 5153:5151/tcp
+    - 5153:5151/udp
+  volumes:
+      - ../../my-akka-remote-sample:/opt/src
