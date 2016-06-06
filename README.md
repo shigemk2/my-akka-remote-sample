@@ -2,14 +2,23 @@
 
 [remoting](http://doc.akka.io/docs/akka/snapshot/scala/remoting.html)
 
-First, execute this command.
+### Requirements
 
+* docker
+* docker-compose
+
+### Installation 
+
+Execute these commands in a terminal.
 ```sh
-activator "runMain com.server.RemoteServerApp"
+$ cd docker/server
+$ ./install.sh
+$ docker-compose build && docker-compose up
 ```
 
-Second, execute this command on other terminal.
-
+Execute these commands in another terminal.
 ```sh
-activator "runMain com.client.RemoteClientApp"
+$ cd docker/client
+$ ./install.sh
+$ docker-compose build && docker-compose up
 ```
