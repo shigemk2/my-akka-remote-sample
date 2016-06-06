@@ -1,0 +1,6 @@
+local-1:
+  build : .
+  ports :
+    - 2553:2553
+  volumes:
+      - /path/to/my-akka-remote-sample:/opt/src
