@@ -1,5 +1,7 @@
 # my-akka-remote-sample
 
+![architecture](https://cloud.githubusercontent.com/assets/795197/15935072/02f088ea-2ea1-11e6-95b6-ad4a68937384.png)
+
 [remoting](http://doc.akka.io/docs/akka/snapshot/scala/remoting.html)
 
 ### Requirements
