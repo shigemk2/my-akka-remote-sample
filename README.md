@@ -1,5 +1,7 @@
 # my-akka-remote-sample
 
+![architecture](https://cacoo.com/diagrams/2YzgEaNKX3VP1imA-C73D6.png)
+
 [remoting](http://doc.akka.io/docs/akka/snapshot/scala/remoting.html)
 
 ### Requirements
